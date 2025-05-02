@@ -1,0 +1,887 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #4f46e5;
+    --background-light: #f8fafc;
+    --background-dark: #0f172a;
+    --text-light: #1e293b;
+    --text-dark: #f1f5f9;
+    --card-bg-light: rgba(255, 255, 255, 0.8);
+    --card-bg-dark: rgba(30, 41, 59, 0.8);
+    --border-light: rgba(226, 232, 240, 0.5);
+    --border-dark: rgba(51, 65, 85, 0.5);
+}
+
+body {
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    background-image: url('ChatGPT Image 25 Nis 2025 18_58_23.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--card-bg-light);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+}
+
+.dark-mode .header-container {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fca5a5, #f9a8d4, #e9d5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode h1 {
+    background: linear-gradient(135deg, #fecaca, #fbcfe8, #f3e8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Switch styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider:after {
+    content: "\f185"; /* Font Awesome sun icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f1c40f;
+    font-size: 14px;
+    opacity: 0;
+    transition: .4s;
+}
+
+.slider:before:after {
+    content: "\f186"; /* Font Awesome moon icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #34495e;
+    font-size: 14px;
+    opacity: 0;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: white;
+}
+
+input:checked + .slider:after {
+    content: "\f186"; /* Font Awesome moon icon */
+    left: 8px;
+    opacity: 1;
+}
+
+input:not(:checked) + .slider:after {
+    content: "\f185"; /* Font Awesome sun icon */
+    right: 8px;
+    opacity: 1;
+}
+
+/* Dark mode için switch stilleri */
+.dark-mode .slider {
+    background-color: #4a5568;
+}
+
+.dark-mode .slider:before {
+    background-color: #1a202c;
+}
+
+.dark-mode input:checked + .slider {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+/* Task input styling */
+.task-input {
+    display: flex;
+    gap: 1rem;
+    background: var(--card-bg-light);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+    margin-bottom: 2rem;
+}
+
+.dark-mode .task-input {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+}
+
+#task-input {
+    flex: 2;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid var(--border-light);
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.dark-mode #task-input {
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+}
+
+#task-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Time Selector Styling */
+.time-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.time-box {
+    position: relative;
+    width: 50px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-box:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.time-box.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.time-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    user-select: none;
+}
+
+.time-separator {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-light);
+    user-select: none;
+}
+
+.dropdown-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.time-dropdown {
+    position: absolute;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
+}
+
+.time-dropdown.active {
+    max-height: 200px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+}
+
+/* Dark mode için dropdown arka plan */
+.dark-mode .time-dropdown {
+    background: #1e293b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.time-option {
+    padding: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.time-option:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+}
+
+.time-option.selected {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Dark mode styles for time selector */
+.dark-mode .time-box {
+    background: rgba(30, 41, 59, 0.3);
+    border-color: var(--border-dark);
+}
+
+.dark-mode .time-box:hover {
+    background: rgba(30, 41, 59, 0.5);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+.dark-mode .time-box.active {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+.dark-mode .time-value,
+.dark-mode .time-separator {
+    color: var(--text-dark);
+}
+
+.dark-mode .time-option {
+    color: var(--text-dark);
+}
+
+.dark-mode .time-option:hover {
+    background: rgba(99, 102, 241, 0.2);
+}
+
+#add-task {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#add-task:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tasks container styling */
+.tasks-container {
+    background: var(--card-bg-light);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+    margin-bottom: 2rem;
+}
+
+.dark-mode .tasks-container {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.8rem;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.task-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dark-mode .task-item {
+    background: rgba(30, 41, 59, 0.3);
+}
+
+.task-item:hover {
+    transform: translateX(5px);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.task-time {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    background: rgba(99, 102, 241, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+}
+
+.dark-mode .task-time {
+    color: var(--text-dark);
+}
+
+/* Complete and Delete buttons styling */
+.complete-btn, .delete-btn {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 0 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.complete-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    margin-right: 0.5rem;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    margin-left: 0.5rem;
+}
+
+.complete-btn::before, .delete-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.complete-btn:hover::before, .delete-btn:hover::before {
+    transform: translateY(0);
+}
+
+.complete-btn:hover, .delete-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.complete-btn i, .delete-btn i {
+    font-size: 1.2rem;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.complete-btn:hover i, .delete-btn:hover i {
+    transform: scale(1.1);
+}
+
+.complete-btn:hover {
+    background: linear-gradient(135deg, #059669, #10b981);
+    box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.complete-btn:active, .delete-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Quote container styling */
+.quote-container {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--card-bg-light);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light);
+    margin-top: 2rem;
+}
+
+.dark-mode .quote-container {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+}
+
+.dice-container {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dice-container:hover {
+    transform: rotate(180deg) scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+#quote {
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin-top: 1rem;
+}
+
+.dark-mode #quote {
+    color: var(--text-dark);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .task-input {
+        flex-direction: column;
+    }
+    
+    .time-selector {
+        width: 100%;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Recent Tasks Panel */
+.recent-tasks-panel {
+    position: relative;
+    margin-bottom: 1rem;
+    z-index: 1000;
+}
+
+.recent-tasks-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--card-bg-light);
+    border: 2px solid var(--border-light);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-light);
+    font-weight: 600;
+    width: 100%;
+}
+
+.recent-tasks-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.recent-tasks-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.recent-tasks-container.active {
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+}
+
+.recent-tasks-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.recent-tasks-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.recent-tasks-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 4px;
+}
+
+.recent-tasks-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+.recent-task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.6rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 0;
+}
+
+.recent-task-item:last-child {
+    margin-bottom: 0;
+}
+
+.recent-task-content {
+    flex: 1;
+    margin-right: 1rem;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.recent-task-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recent-task-time {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recent-task-add {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.recent-task-add:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode styles for recent tasks */
+.dark-mode .recent-tasks-toggle {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .recent-tasks-container {
+    background: #1e293b;
+}
+
+.dark-mode .recent-task-item {
+    background: rgba(30, 41, 59, 0.3);
+}
+
+.dark-mode .recent-task-text,
+.dark-mode .recent-task-time {
+    color: var(--text-dark);
+}
+
+/* Completed Tasks Panel */
+.completed-tasks-panel {
+    position: relative;
+    margin-bottom: 1rem;
+    z-index: 1000;
+}
+
+.completed-tasks-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--card-bg-light);
+    border: 2px solid var(--border-light);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-light);
+    font-weight: 600;
+    width: 100%;
+}
+
+.completed-tasks-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.completed-tasks-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid var(--border-light);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.completed-tasks-container.active {
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible;
+    overflow-y: auto;
+}
+
+.completed-task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.6rem;
+    margin-bottom: 0.5rem;
+    min-width: 0;
+}
+
+.completed-task-item:last-child {
+    margin-bottom: 0;
+}
+
+.completed-task-content {
+    flex: 1;
+    margin-right: 1rem;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.completed-task-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.completed-task-time {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Dark mode styles for completed tasks */
+.dark-mode .completed-tasks-toggle {
+    background: var(--card-bg-dark);
+    border-color: var(--border-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .completed-tasks-container {
+    background: #1e293b;
+}
+
+.dark-mode .completed-task-item {
+    background: rgba(30, 41, 59, 0.3);
+}
+
+.dark-mode .completed-task-text,
+.dark-mode .completed-task-time {
+    color: var(--text-dark);
+}
+
+.undo-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.undo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.undo-btn i {
+    font-size: 1rem;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.undo-btn:hover i {
+    transform: scale(1.1);
+}
+
+.undo-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
